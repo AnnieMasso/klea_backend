@@ -14,13 +14,13 @@ return new class extends Migration
         //
         Schema::create('biens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bailleur_id')->constrained('users')->onUpdate('cascade');
+            $table->foreignId('bailleur_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('titre');
             $table->string('type');
             $table->text('description');
             $table->integer('montant');
             $table->string('modalité_paiement');
-            $table->string('statut')->default('inactif');
+            $table->enum('statut', ['actif', 'inactif'])->default('inactif');
             $table->integer('superficie');
             $table->integer('nb_chambres');
             $table->integer('nb_douches');
@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('ville');
             $table->string('quartier');
             $table->string('lieu_dit');
-            $table->string('localisation')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
         });
     }

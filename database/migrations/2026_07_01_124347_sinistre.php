@@ -14,11 +14,11 @@ return new class extends Migration
         //
         Schema::create('sinistres', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contrat_id')->constrained('contrats')->onUpdate('cascade');
+            $table->foreignId('contrat_id')->constrained('contrats')->cascadeOnUpdate()->cascadeOnDelete();
             $table->date('date_sinistre');
             $table->text('description');
-            $table->string('img2')->nullable();
-            $table->string('img1')->nullable();
+            $table->string('img2');
+            $table->string('img1');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
         //
         Schema::create('departs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contrat_id')->constrained('contrats')->onUpdate('cascade');
+            $table->foreignId('contrat_id')->constrained('contrats')->cascadeOnUpdate()->cascadeOnDelete();
             $table->date('date_depart_prevue');
             $table->date('date_confirmation')->nullable();
             $table->boolean('statut')->default(false);

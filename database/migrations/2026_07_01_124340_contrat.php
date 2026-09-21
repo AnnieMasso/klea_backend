@@ -14,9 +14,9 @@ return new class extends Migration
         //
         Schema::create('contrats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('conversation_id')->constrained('conversations')->onUpdate('cascade');
+            $table->foreignId('conversation_id')->constrained('conversations')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('type');
-            $table->string('etat')->default('en attente');
+            $table->enum('etat', ['en attente', 'signe', 'annule', 'resilie'])->default('en attente');
             $table->date('date_resiliation')->nullable();
             $table->date('date_signature')->nullable();
             $table->date('date_annulation')->nullable();

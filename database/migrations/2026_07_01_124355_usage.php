@@ -14,7 +14,7 @@ return new class extends Migration
         //
         Schema::create('usages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bien_id')->constrained('biens')->onUpdate('cascade');
+            $table->foreignId('bien_id')->constrained('biens')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('nom_usage');
             $table->timestamps();
         });

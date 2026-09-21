@@ -14,8 +14,9 @@ return new class extends Migration
         //
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');
-            $table->foreignId('bien_id')->constrained('biens')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('bien_id')->constrained('biens')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unique(['user_id', 'bien_id']);
             $table->timestamps();
         });
     }

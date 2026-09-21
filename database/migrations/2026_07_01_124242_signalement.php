@@ -14,8 +14,8 @@ return new class extends Migration
         //
         Schema::create('signalements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plaignant_id')->constrained('users')->onUpdate('cascade');
-            $table->foreignId('accuse_id')->constrained('users')->onUpdate('cascade');
+            $table->foreignId('plaignant_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('accuse_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('motif');
             $table->string('preuve1');
             $table->string('preuve2')->nullable();

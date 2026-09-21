@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prenom')->nullable();
             $table->string('email')->unique();
-            $table->string('role');
+            $table->enum('role', ['administrateur', 'bailleur', 'locataire']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('mot_de_passe');
-            $table->string('statut')->default('inactif');
-            $table->string('cni_recto')->nullable();
-            $table->string('cni_verso')->nullable();
-            $table->string('assurance_habitation')->nullable();
+            $table->enum('statut', ['actif', 'inactif'])->default('inactif');
+            $table->string('cni_recto');
+            $table->string('cni_verso');
+            $table->string('assurance_habitation');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -35,7 +35,7 @@ return new class extends Migration
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->nullable()->index()->constrained('users')->nullOnDelete();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');
